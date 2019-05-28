@@ -18,26 +18,26 @@
 			      <h3 class="box-title">Ingrese los datos del animal muerto.</h3>
 			    </div>
 			    <!-- /.box-header -->
-			    <form method="POST" action="{{-- route('trabajos.muertes.almacenarMuerte') --}}">
+			    <form method="POST" action="{{ route('trabajos.muertes.almacenarMuerte') }}">
 			    	{{ csrf_field() }}
 			    	<div class="box-body">
 			    		<div class="form-group col-md-12">
 							<label>Animal</label>
-							<select class="js-example-basic-single form-control" name="animal" >
+							<select class="js-example-basic-single form-control" name="animal_id" >
 								@foreach($animales as $animal)
 									<option value="{{ $animal->id }}">{{$animal->nua}} - {{$animal->nombreAnimal}}</option>
 								@endforeach
-<							</select>
+							</select>
 						</div>
 						<div class="form-group col-md-12">
 							<label>Motivo de la muerte</label>
-							<input class="form-control" list="listaMotivos">
- 
-							<datalist id="listaMotivos">
+							<select class="js-example-basic-single form-control" name="motivo_id" >
+								<option>Seleccione un motivo de la muerte</option>
 								@foreach($motivos as $motivo)
-									<option value="{{ $motivo->id }}">{{$animal->nombreAnimal}}</option>
+									<option value="{{ $motivo->id }}"> {{$motivo->nombreMotivoMuerte}}</option>
 								@endforeach
-							</datalist>
+							</select>
+							
 						</div>
 			    		<div class="form-group col-md-12">
 			    			<label>Observaciones</label>

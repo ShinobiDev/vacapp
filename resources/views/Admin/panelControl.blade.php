@@ -1,7 +1,8 @@
 @extends('Admin.layotu')
 
 @section('contenido')
-
-	<h1>¡Bienvenido a Lolapp!</h1>
+	<br>
+	<br>
+	<img class="col-md-offset-3" src="{{asset('adminLte/img/logo-opacidad.png')}}">
 
 @stop

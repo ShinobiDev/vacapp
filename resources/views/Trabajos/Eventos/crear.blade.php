@@ -35,7 +35,7 @@
 								@foreach($paises as $pais)
 									<option value="{{ $pais->id }}"> {{$pais->nombrePais}}</option>
 								@endforeach
-<							</select>
+							</select>
 						</div>
 			    		<div class="form-group col-md-6">
 			    			<label>Ciudad</label>

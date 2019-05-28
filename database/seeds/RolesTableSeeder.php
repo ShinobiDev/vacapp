@@ -15,6 +15,10 @@ class RolesTableSeeder extends Seeder
         Rol::truncate();
 
         $rol = new Rol;
+        $rol->nombreRol = "Super Admin";
+        $rol->save();
+
+        $rol = new Rol;
         $rol->nombreRol = "Administrador";
         $rol->save();
 

@@ -22,5 +22,12 @@ class EstadosAnimalesTableSeeder extends Seeder
         $estado->nombreEstado = "Vendido";
         $estado->save();
 
+        $estado = new EstadoAnimal;
+        $estado->nombreEstado = "Enfermo";
+        $estado->save();
+
+        $estado = new EstadoAnimal;
+        $estado->nombreEstado = "Muerto";
+        $estado->save();
     }
 }

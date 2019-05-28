@@ -56,10 +56,10 @@ class RazasController extends Controller
 
     public function indexClasificacion()
     {
-        $clasificaciones = Clasificacion::all();
+        $etapas = Clasificacion::all();
         //dd($razas);
 
-        return view('Trabajos.Clasificaciones.index', compact('clasificaciones'));
+        return view('Trabajos.Clasificaciones.index', compact('etapas'));
     }
 
     public function crearClasificacion()
@@ -71,6 +71,7 @@ class RazasController extends Controller
     public function almacenarClasificacion(Request $request)
     {
         //dd($request);
+
         $clasificaciones = new Clasificacion;
 
         $clasificaciones->raza_id = $request->get('raza_id');

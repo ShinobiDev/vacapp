@@ -10,13 +10,13 @@
 @stop
 
 @section('contenido')
-	<div class="box box-danger">
+	<div class="box box-success">
 	    <div class="box-header">
 	      <h3 class="box-title">Detalle del Ganado</h3>
 	    </div>
 	    <!-- /.box-header -->
 
-	    <div class="box-body table-responsive bg-danger">
+	    <div class="box-body table-responsive bg-success">
 	    	<div class="bg-success">
 	    		<h5 class="col-md-3" style="text-align: right">Total de animales</h5>
 		    	<h4 class="col-md-1" style="text-align: left">{{ $totalAnimal }}</h4>
@@ -28,7 +28,7 @@
 	      <table id="example1" class="table table-bordered table-striped">
 	        <thead>
 	        	<tr>
-	        		<th>id</th>
+	        		
 	        		<th>NUA</th>
 	        		<th>Nombre</th>
 	        		<th>Padre</th>
@@ -51,7 +51,7 @@
 	        	@endphp
 	        	@foreach($animales as $animal)
 	        		<tr>
-	        			<td>{{ $animal->id }}</td>
+	        			
 	        			<td>{{ $animal->nua }}</td>
 	        			<td>{{ $animal->nombreAnimal }}</td>
 	        			<td>{{ $animal->nombrePadre }}</td>
@@ -80,10 +80,13 @@
 	        				@endif
 	        			@endif
 	        			<td>{{ $animal->peso }}</td>
-	        			<td>{{ $animal->fechaNacimiento }}</td>	        			
+	        			<td>{{ $animal->fechaNacimiento }}</td>	
+
 	        			
 	        			<td>
-		        			<button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#exampleModal{{$animal->id}}">Editar</button>
+	        				<button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#exampleModal{{$animal->id}}">Editar</button>
+	        				<a href="{{ route('controlPeso.estadisticaCrecimientoIndividual',$animal->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart-o"> </i> Crecimiento</a>
+		        			
 		        			
 		        			<div class="modal fade" id="exampleModal{{$animal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 

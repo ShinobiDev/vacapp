@@ -16,6 +16,19 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+	Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
+
+    // Registration Routes...
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register/CrearUsuario', 'Auth\UsuariosController@crear')->name('registrarNuevoUsuario');
+
+    // Password Reset Routes...
+    /*Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+	*/
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'auth'], function(){
 	/*Vista del panel administrativo*/
 	Route::get('/', 'UsuariosController@panel');
@@ -113,8 +126,21 @@ Route::group(['prefix'=>'trabajos','namespace'=>'Trabajos','middleware'=>'auth']
 	Route::post('animales/editar','AnimalesController@actualizarAnimal')->name('trabajos.animales.update');
 	/*Vista de las crias*/
 	Route::get('animales/crias','AnimalesController@crias')->name('animales.crias');
+	
+
 	/*Formulario para el registro de muertes de animales*/
 	Route::get('animales/muertes','AnimalesController@registroMuerte')->name('animales.muertes.crear');
+	/*Ingreso de datos al sistema*/
+	Route::post('muertes/almacenar','AnimalesController@almacenarMuerte')->name('trabajos.muertes.almacenarMuerte');
+	/*vista de animales muertos*/
+	Route::get('animales/muertesIndex','AnimalesController@indexMuerte')->name('animales.muertes.index');
+
+	/*Formulario para crear motivos de muerte*/
+	Route::get('animales/motivosMuertes','AnimalesController@registroMotivoMuerte')->name('animales.motivosMuertes.crear');
+	/*Almacener los motivos de la muerte*/
+	Route::post('animales/almacenarMotivoMuertes','AnimalesController@almacenarMotivoMuerte')->name('trabajos.muertes.almacenarMotivoMuerte');
+	/*Ver los motivos de muerte de animales*/
+	Route::get('animales/indexMotivoMuerte','AnimalesController@indexMotivoMuerte')->name('animales.motivosMuerte.index');
 
 	
 	/*Vista de todos los Ordeños*/
@@ -148,6 +174,9 @@ Route::group(['prefix'=>'trabajos','namespace'=>'Trabajos','middleware'=>'auth']
 	/*Vista del formulario para crear los controles de Peso*/
 	Route::get('controlPeso/eliminar/{control_id}','AnimalesController@eliminarControlPeso')->name('controlPeso.eliminarControlPeso');
 
+
+	Route::get('controlPeso/estadisticaCrecimiento/{animal_id}','EstadisticaCrecimientoController@vistaIndividual')->name('controlPeso.estadisticaCrecimientoIndividual');	
+
 	
 	/*Vista de los movimientos*/
 	Route::get('movimientos','AnimalesController@indexMovimientos')->name('movimientos.index');
@@ -176,6 +205,8 @@ Route::group(['prefix'=>'trabajos','namespace'=>'Trabajos','middleware'=>'auth']
 	Route::post('eventos/almacenar','EventosController@almacenar')->name('trabajos.eventos.almacenar');
 	/*Vista del formulario para actualizar los ordeños*/
 	Route::post('eventos/editar/{animal_id}','EventosController@actualizar')->name('trabajos.eventos.update');
+
+
 
 
 });

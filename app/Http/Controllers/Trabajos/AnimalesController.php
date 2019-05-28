@@ -18,6 +18,8 @@ use App\Venta;
 use Carbon\Carbon;
 use Route;
 use App\MotivoMuerte;
+use App\Muerte;
+
 
 
 class AnimalesController extends Controller
@@ -44,7 +46,7 @@ class AnimalesController extends Controller
 
         if($an < 1)
         {
-            return back()->with('errors','No existen animales creados');
+            return back()->with('errors','No existen animales creados o en estado vivo');
         }
 
         //dd($animales[0]->fechaNacimiento);
@@ -123,12 +125,12 @@ class AnimalesController extends Controller
             return back()->with('errors','No existen GENEROS creadas, sin crear los GENEROS, no puede registrar un nuevo animal ');
         }
         
-        $cla = count($clasificacion = Clasificacion::all());
+        /*$cla = count($clasificacion = Clasificacion::all());
         if($cla < 1)
         {
             return back()->with('errors','No existen CLASIFICACIONES creadas, sin crear las CLASIFICACIONES, no puede registrar un nuevo animal ');
         }
-
+        */
     	return view('Trabajos.Animales.crear', compact('razas','fincas','generos','tipos','clasificacion','padres','madres','hoy'));
     }
 
@@ -165,12 +167,12 @@ class AnimalesController extends Controller
         {
             return back()->with('errors','No existen GENEROS creadas, sin crear los GENEROS, no puede registrar un nuevo animal ');
         }
-        
+        /*
         $cla = count($clasificacion = Clasificacion::all());
         if($cla < 1)
         {
             return back()->with('errors','No existen CLASIFICACIONES creadas, sin crear las CLASIFICACIONES, no puede registrar un nuevo animal ');
-        }
+        }*/
         $fi = count($fincas);
         if($fi < 1)
         {
@@ -203,7 +205,7 @@ class AnimalesController extends Controller
         //]);
 
         //dd($madre[0]->nombreAnimal);
-        
+        //dd($request);
     	$animal = new Animal;
 
     	$animal->nombreAnimal = $request->get('nombreAnimal');
@@ -215,6 +217,7 @@ class AnimalesController extends Controller
         $animal->finca_id = $request->get('finca');
         $animal->fechaNacimiento = $request->get('fechaNacimiento');
         $animal->peso = $request->get('peso');
+        $animal->pesoNacimiento = $request->get('pesoNacimiento');
         $animal->raza_id = $request->get('raza');
         $animal->tipo_id = $request->get('tipo');
         $animal->genero_id = $request->get('genero');
@@ -273,6 +276,7 @@ class AnimalesController extends Controller
         $animal->finca_id = $request->get('finca');
         $animal->fechaNacimiento = $request->get('fechaNacimiento');
         $animal->peso = $request->get('peso');
+        $animal->pesoNacimiento = $request->get('pesoNacimiento');
         $animal->raza_id = $request->get('raza');
         $animal->tipo_id = $request->get('tipo');
         $animal->genero_id = $request->get('genero');
@@ -305,11 +309,15 @@ class AnimalesController extends Controller
     public function almacenarControlPeso(Request $request)
     {   
         $animal = Animal::where('id',(int)$request->animal)->first();
+        $pesoAntiguo = $animal->peso;
+
         $animal->peso = $request->kilogramos;
         $animal->update();
-        //dd($request);
-        $control = new ControlPeso;
+        //dd($pesoAntiguo);
+
+        $control = new ControlPeso; 
         $control->animal_id = $request->animal;
+        $control->pesoAntiguo = $pesoAntiguo;
         $control->kilogramos = $request->kilogramos;
         $control->save();
 
@@ -437,11 +445,91 @@ class AnimalesController extends Controller
 
     public function registroMuerte()
     {
+
         $animales = Animal::all();
         $motivos = MotivoMuerte::all();
+
+        $a = count($animales);
+        $m = count($motivos);
+
+        if($a < 1)
+        {
+            return back()->with('errors','No existen Animales creados, sin crear los ANIMALES, no puede registrar una muerte de animal ');
+        }
+
+        if($m < 1)
+        {
+            return back()->with('errors','No existen MOTIVOS DE MUERTES creadas, sin crear los MOTIVOS DE MUERTE, no puede registrar una muerte de animal ');
+        }
+
+
         return view('Trabajos.Muertes.crear', compact('animales','motivos'));
     }
 
+    public function almacenarMuerte(Request $request)
+    {
+        //dd($request);
+        $muerte = new Muerte;
 
+        $muerte->animal_id = $request->get('animal_id');
+        $muerte->motivo_id = $request->get('motivo_id');
+        $muerte->observacion = $request->observacion;
+        $muerte->save();
+        $id = (int)$request->get('animal_id');
+        //dd($request->animal_id);
+        $animal = Animal::where('id', $id)->first();
+        $animal->estado_id = 4;
+        $animal->motivoMuerte_id = $request->get('motivo_id');
+        $animal->fechaMuerte = Carbon::now();
+        $animal->update();
+        
+
+        return back()->with('flash','La muerte del animal se registro satisfactoriamente.');
+
+    }
+
+    public function indexMuerte()
+    {
+        $animales = Animal::select('animals.id','nua','nombreAnimal','raza_id','finca_id','animals.tipo_id','genero_id','peso','fechaNacimiento','valorCompra','nombreProveedor','fechaCompra','razas.nombreRaza','fincas.nombreFinca','tipos.nombreTipo','generos.nombreGenero','nombreMotivoMuerte','motivoMuerte_id','fechaMuerte')
+        ->join('razas','animals.raza_id','razas.id')
+        ->join('fincas','animals.finca_id','fincas.id')
+        ->join('tipos','animals.tipo_id','tipos.id')
+        ->join('generos','animals.genero_id','generos.id')
+        ->join('motivo_muertes','animals.motivoMuerte_id','motivo_muertes.id')
+        ->where('estado_id',4)
+        ->get();
+
+        return view('Trabajos.Muertes.index',compact('animales'));
+    }
+
+    public function registroMotivoMuerte()
+    {   
+        $tipos = Tipo::all();
+        $motivos = MotivoMuerte::all();
+        //dd($tipos);
+        return view('Trabajos.Muertes.crearMotivoMuerte', compact('tipos','motivos'));
+    }
+
+    public function almacenarMotivoMuerte(Request $request)
+    {
+        //dd($request);
+        $motivo = new MotivoMuerte;
+
+        
+        $motivo->nombreMotivoMuerte = $request->nombreMotivoMuerte;
+        $motivo->descripcion = $request->descripcion;
+        $motivo->save();
+
+        return back()->with('flash','El nuevo motivo de muerte.');
+    }
+
+    public function indexMotivoMuerte()
+    {
+        $motivos = MotivoMuerte::all();
+
+        //dd($motivos);
+
+        return view('Trabajos.Muertes.indexMotivoMuerte', compact('motivos'));
+    }
 
 }

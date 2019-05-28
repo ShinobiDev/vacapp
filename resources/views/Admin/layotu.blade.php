@@ -195,9 +195,12 @@ desired effect
           </a>
           <ul class="treeview-menu">
             @if(auth()->user()->rol_id == 1)
+                <li><a href="{{route('animales.motivosMuertes.crear')}}"><i class="fa fa-pencil"></i>Crear motivo muerte</a></li>
+                <li><a href="{{route('animales.motivosMuerte.index')}}"><i class="fa fa-eye"></i>Ver motivo muerte</a></li>
                 <li><a href="{{route('animales.muertes.crear')}}"><i class="fa fa-pencil"></i>Registrar animal muerto</a></li>
+                
             @endif
-            <li><a href="{{ route('utilidades.index') }}"><i class="fa fa-eye"></i>Ver animales muertos</a></li>
+            <li><a href="{{ route('animales.muertes.index') }}"><i class="fa fa-eye"></i>Ver animales muertos</a></li>
           </ul>
         </li>
         <li class="treeview">

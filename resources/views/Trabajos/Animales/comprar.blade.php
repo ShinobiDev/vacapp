@@ -20,7 +20,25 @@
 			    <!-- /.box-header -->
 			    <form method="POST" action="{{ route('trabajos.animales.almacenarCompra') }}">
 			    	{{ csrf_field() }}
-			    	<div class="box-body">			    		
+			    	<div class="box-body">	
+			    		<div class="form-group col-md-3">
+			    			<label>Tipo</label>
+							<select name="tipo" class="form-control"  value="{{ old('tipo') }}" required>
+								<option value="0">Selecciona un Tipo</option>
+								@foreach($tipos as $tipo)
+									<option value="{{ $tipo->id }}">- {{ $tipo->nombreTipo }}</option>
+								@endforeach
+							</select>	    			
+			    		</div>
+			    		<div class="form-group col-md-3">
+			    			<label>Raza</label>
+							<select name="raza" class="form-control"  value="{{ old('raza') }}" required>
+								<option value="0">Selecciona una Raza</option>
+								@foreach($razas as $raza)
+									<option value="{{ $raza->id }}">- {{ $raza->nombreRaza }}</option>
+								@endforeach
+							</select>
+			    		</div>		    		
 			    		<div class="form-group col-md-6">
 			    			<label>Nombre Animal</label>
 			    			<input name="nombreAnimal" class="form-control" placeholder="Ingrese el nombre del animal" value="{{ old('nombreAnimal') }}" required>			    			
@@ -71,27 +89,15 @@
 			    			<input type="date" name="fechaNacimiento" max="{{$hoy}}" class="form-control" value="{{ old('fechaNacimiento') }}" required>			    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Peso en Kg</label>
+			    			<label>Peso Nacimiento</label>
+			    			<input name="pesoNacimiento" class="form-control" placeholder="Ingrese el peso en kilogramos"  value="{{ old('peso') }}">			    			
+			    		</div>
+			    		<div class="form-group col-md-3">
+			    			<label>Peso actual</label>
 			    			<input name="peso" class="form-control" placeholder="Ingrese el peso en kilogramos"  value="{{ old('peso') }}" required>			    			
 			    		</div>
-			    		<div class="form-group col-md-3">
-			    			<label>Raza</label>
-							<select name="raza" class="form-control"  value="{{ old('raza') }}" required>
-								<option value="0">Selecciona una Raza</option>
-								@foreach($razas as $raza)
-									<option value="{{ $raza->id }}">- {{ $raza->nombreRaza }}</option>
-								@endforeach
-							</select>
-			    		</div>
-			    		<div class="form-group col-md-3">
-			    			<label>Tipo</label>
-							<select name="tipo" class="form-control"  value="{{ old('tipo') }}" required>
-								<option value="0">Selecciona un Tipo</option>
-								@foreach($tipos as $tipo)
-									<option value="{{ $tipo->id }}">- {{ $tipo->nombreTipo }}</option>
-								@endforeach
-							</select>	    			
-			    		</div>
+			    		
+			    		
 			    		<div class="form-group col-md-3">
 			    			<label>Genero</label>
 							<select name="genero" class="form-control"  value="{{ old('genero') }}" required>

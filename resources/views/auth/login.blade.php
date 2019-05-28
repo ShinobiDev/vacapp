@@ -59,6 +59,7 @@
         <div class="col-xs-4">
           <button type="submit" class="btn btn-success btn-block btn-flat">Ingresar</button>
         </div>
+        <a href="{{route('register')}}" class="btn btn-primary text-center">Registrar un nuevo usuario</a>
         <!-- /.col -->
       </div>
     </form>

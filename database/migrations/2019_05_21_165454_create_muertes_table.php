@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateControlPesosTable extends Migration
+class CreateMuertesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateControlPesosTable extends Migration
      */
     public function up()
     {
-        Schema::create('control_pesos', function (Blueprint $table) {
+        Schema::create('muertes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('animal_id');
-            $table->decimal('pesoAntiguo');
-            $table->decimal('kilogramos');
+            $table->unsignedInteger('motivo_id');
+            $table->string('observacion')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateControlPesosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('control_pesos');
+        Schema::dropIfExists('muertes');
     }
 }

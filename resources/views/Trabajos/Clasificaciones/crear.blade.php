@@ -23,7 +23,7 @@
 			    	<div class="box-body">
 			    		<div class="form-group col-md-12">
 							<label>Raza que se va a parametrizar</label>
-							<select class="js-example-basic-single form-control" name="razas_id">
+							<select class="js-example-basic-single form-control" name="raza_id">
 									<option> Seleccione la raza</option>
 								@foreach($razas as $raza)
 									<option value="{{ $raza->id }}"> {{$raza->nombreRaza}}</option>

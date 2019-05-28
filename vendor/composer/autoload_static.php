@@ -374,6 +374,7 @@ class ComposerStaticInitcc4b003978fbd9ae0d896cfbdd3cf435
         'App\\MotivoMovimiento' => __DIR__ . '/../..' . '/app/MotivoMovimiento.php',
         'App\\MotivoMuerte' => __DIR__ . '/../..' . '/app/MotivoMuerte.php',
         'App\\Movimiento' => __DIR__ . '/../..' . '/app/Movimiento.php',
+        'App\\Muerte' => __DIR__ . '/../..' . '/app/Muerte.php',
         'App\\Nombre' => __DIR__ . '/../..' . '/app/Nombre.php',
         'App\\Ordeno' => __DIR__ . '/../..' . '/app/Ordeno.php',
         'App\\Pais' => __DIR__ . '/../..' . '/app/Pais.php',

@@ -28,6 +28,7 @@ class CreateAnimalsTable extends Migration
             $table->unsignedInteger('tipo_id');
             $table->unsignedInteger('genero_id');
             $table->decimal('peso');
+            $table->decimal('pesoNacimiento')->nullable();
             $table->date('fechaNacimiento');
             $table->string('tipoNacimiento');
             $table->string('valorCompra')->nullable();
@@ -35,6 +36,8 @@ class CreateAnimalsTable extends Migration
             $table->date('fechaCompra')->nullable();
             $table->unsignedInteger('estado_id')->nullable();
             $table->integer('hijos')->nullable();
+            $table->unsignedInteger('motivoMuerte_id')->nullable();
+            $table->date('fechaMuerte')->nullable();
             $table->timestamps();
         });
     }

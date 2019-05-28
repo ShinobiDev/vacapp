@@ -44,6 +44,7 @@ return array(
     'App\\MotivoMovimiento' => $baseDir . '/app/MotivoMovimiento.php',
     'App\\MotivoMuerte' => $baseDir . '/app/MotivoMuerte.php',
     'App\\Movimiento' => $baseDir . '/app/Movimiento.php',
+    'App\\Muerte' => $baseDir . '/app/Muerte.php',
     'App\\Nombre' => $baseDir . '/app/Nombre.php',
     'App\\Ordeno' => $baseDir . '/app/Ordeno.php',
     'App\\Pais' => $baseDir . '/app/Pais.php',
