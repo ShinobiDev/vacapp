@@ -79,9 +79,19 @@ class EstadisticaCrecimientoController extends Controller
 
 		}else{
 
-            $controles = ControlPeso::select('animal_id','pesoAntiguo','kilogramos','created_at')->where('animal_id', $a)->get();
+            $controles = ControlPeso::select('id','animal_id','pesoAntiguo','kilogramos','created_at')->where('animal_id', $a)->get();
 
-			return view('Trabajos.ControlPeso.promedioCrecimiento', compact('controles'));
+            $ultimoControl = ControlPeso::select('id','animal_id','pesoAntiguo','kilogramos','created_at')->where('animal_id', $a)->orderBy('id','DESC')->first();
+
+            $pesoAntiguo = $ultimoControl->pesoAntiguo;
+
+            $kilogramos = $ultimoControl->kilogramos;
+
+            $prom = $kilogramos - $pesoAntiguo;
+            $prom = number_format($prom);
+            //dd($prom);
+
+			return view('Trabajos.ControlPeso.promedioCrecimiento', compact('controles','prom','ultimoControl'));
 
 		}    		
     	

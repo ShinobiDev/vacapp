@@ -17,6 +17,7 @@ class CreateControlPesosTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('animal_id');
             $table->decimal('pesoAntiguo');
+            $table->date('fechaAntigua')->nullable();
             $table->decimal('kilogramos');
             $table->timestamps();
         });

@@ -314,9 +314,25 @@ class AnimalesController extends Controller
         $animal->peso = $request->kilogramos;
         $animal->update();
         //dd($pesoAntiguo);
+        $controlAntiguo = ControlPeso::where('animal_id', $request->animal)->first();
+        
+
+        if($controlAntiguo == null)
+        {
+            $control = new ControlPeso; 
+            $control->animal_id = $request->animal;
+            $control->pesoAntiguo = $pesoAntiguo;
+            $control->kilogramos = $request->kilogramos;
+            $control->save();
+
+            return back()->with('flash','El registro del Control de Peso, se realizo exitosamente.');
+        }
+        //$conAn = $controlAntiguo->created_at->toFormattedDateString();
+        //dd($conAn);
 
         $control = new ControlPeso; 
         $control->animal_id = $request->animal;
+        $control->fechaAntigua = $controlAntiguo->created_at;
         $control->pesoAntiguo = $pesoAntiguo;
         $control->kilogramos = $request->kilogramos;
         $control->save();

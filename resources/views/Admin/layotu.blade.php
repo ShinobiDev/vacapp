@@ -465,7 +465,7 @@ desired effect
   $(function (){
     /*DATATABLE*/
     $('#example1').DataTable( {
-                    stateSave: true,
+                    stateSave: false,
                     responsive: true,
                     dom: 'Bfrtip',
                     buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
