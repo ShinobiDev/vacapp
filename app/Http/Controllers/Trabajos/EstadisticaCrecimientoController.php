@@ -79,19 +79,29 @@ class EstadisticaCrecimientoController extends Controller
 
 		}else{
 
-            $controles = ControlPeso::select('id','animal_id','pesoAntiguo','kilogramos','created_at')->where('animal_id', $a)->get();
+            $controles = ControlPeso::select('id','animal_id','pesoAntiguo','fechaAntigua','kilogramos','created_at')->where('animal_id', $a)->get();
 
-            $ultimoControl = ControlPeso::select('id','animal_id','pesoAntiguo','kilogramos','created_at')->where('animal_id', $a)->orderBy('id','DESC')->first();
+            $ultimoControl = ControlPeso::select('id','animal_id','pesoAntiguo','fechaAntigua','kilogramos','created_at')->where('animal_id', $a)->orderBy('id','DESC')->first();
 
             $pesoAntiguo = $ultimoControl->pesoAntiguo;
+            
+            $fechaAntigua = date('Y-m-d', strtotime($ultimoControl->fechaAntigua));
+            $fechaActual = date('Y-m-d', strtotime($ultimoControl->created_at));
 
+            
             $kilogramos = $ultimoControl->kilogramos;
 
             $prom = $kilogramos - $pesoAntiguo;
             $prom = number_format($prom);
-            //dd($prom);
+            $kilogramos = number_format($kilogramos);
+            $pesoAntiguo = number_format($pesoAntiguo);
 
-			return view('Trabajos.ControlPeso.promedioCrecimiento', compact('controles','prom','ultimoControl'));
+            $now = Carbon::now();
+
+            $diferenciaEntreFecha = Carbon::parse($now)->diffInDays($fechaAntigua);
+            dd($diferenciaEntreFecha);
+
+			return view('Trabajos.ControlPeso.promedioCrecimiento', compact('controles','prom','ultimoControl','fechaAntigua','fechaActual','kilogramos','pesoAntiguo'));
 
 		}    		
     	
