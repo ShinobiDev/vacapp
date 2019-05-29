@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('rol_id')->nullable();
             $table->unsignedInteger('estado_id');
             $table->unsignedInteger('finca_id')->nullable();
+            $table->unsignedInteger('tarifa_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

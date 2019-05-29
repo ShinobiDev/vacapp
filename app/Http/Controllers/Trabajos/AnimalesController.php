@@ -317,6 +317,7 @@ class AnimalesController extends Controller
         $controlAntiguo = ControlPeso::where('animal_id', $request->animal)->first();
         
 
+
         if($controlAntiguo == null)
         {
             $control = new ControlPeso; 
@@ -330,6 +331,8 @@ class AnimalesController extends Controller
         //$conAn = $controlAntiguo->created_at->toFormattedDateString();
         //dd($conAn);
 
+        dd($controlAntiguo->created_at);
+        
         $control = new ControlPeso; 
         $control->animal_id = $request->animal;
         $control->fechaAntigua = $controlAntiguo->created_at;

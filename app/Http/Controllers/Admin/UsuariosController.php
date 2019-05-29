@@ -5,14 +5,36 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Finca;
+use App\Tarifa;
 use App\Rol;
 use App\User;
+use Carbon\carbon;
 
 class UsuariosController extends Controller
 {
     public function panel()
-	{
-		return view('Admin.panelControl');
+	{  
+        $user = auth()->user();
+        $fechaSus = auth()->user()->created_at;
+        $now = Carbon::now();
+        $diasSuscripcion = Carbon::parse($now)->diffInDays($fechaSus);
+        $fechaSus = $fechaSus->toFormattedDateString(); ;
+
+        //dd($diasSuscripcion);
+        if($diasSuscripcion <= 365)
+        {
+            return view('Admin.panelControl');    
+        }
+
+        $usuario = User::select('users.id','name','email','nombreTarifa','valorTarifa','tarifa_id')->join('tarifas','users.tarifa_id','tarifas.id')
+            ->get();
+
+            dd($usuario);
+
+        $tarifas = Tarifa::all();
+
+        return view('Admin.usuarioPasado', compact('tarifas','usuario'));    
+		
 	}
 
 	public function crear()

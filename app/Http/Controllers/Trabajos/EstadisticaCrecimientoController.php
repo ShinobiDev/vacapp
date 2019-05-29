@@ -98,7 +98,7 @@ class EstadisticaCrecimientoController extends Controller
 
             $now = Carbon::now();
 
-            $diferenciaEntreFecha = Carbon::parse($now)->diffInDays($fechaAntigua);
+            $diferenciaEntreFecha = Carbon::parse($fechaActual)->diffInDays($fechaAntigua);
             dd($diferenciaEntreFecha);
 
 			return view('Trabajos.ControlPeso.promedioCrecimiento', compact('controles','prom','ultimoControl','fechaAntigua','fechaActual','kilogramos','pesoAntiguo'));

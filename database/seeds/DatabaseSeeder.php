@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UtilidadesTableSeeder::class);
         $this->call(EstadosAnimalesTableSeeder::class);
         $this->call(RolesTableSeeder::class);
+        $this->call(TarifasTableSeeder::class);
     }
 }
