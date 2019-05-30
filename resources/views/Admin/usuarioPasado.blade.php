@@ -159,29 +159,38 @@ desired effect
     <div class="col-md-6 col-md-offset-3">
       <div class="box box-danger">
           <div class="box-header bg-danger">
-            <h3 class="box-title">Su suscripción a vencido para continuar usando LOLAPP, es necesario realizar la renovación</h3>
+            <h3 class="box-title">{{ $usuario[0]->name }}</h3>
           </div>
           <!-- /.box-header -->
-          <form method="POST" action="{{-- route('trabajos.eventos.almacenar') --}}">
-            {{ csrf_field() }}
+           <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+            
+            <input name="merchantId"    type="hidden"  value="508029"   >
+            <input name="accountId"     type="hidden"  value="512321" >
+            <input name="description"   type="hidden"  value="Test PAYU"  >
+            <input name="referenceCode" type="hidden"  value="TestPayU" >
+            <input name="amount"        type="hidden"  value="{{ $valor }}"   >
+            <input name="tax"           type="hidden"  value="3193"  >
+            <input name="taxReturnBase" type="hidden"  value="16806" >
+            <input name="currency"      type="hidden"  value="COP" >
+            <input name="signature"     type="hidden"  value="1d81cd761b4e446654a5043375cd1041"  >
+            <input name="test"          type="hidden"  value="1" >
+            <input name="buyerEmail"    type="hidden"  value="test@test.com" >
+            <input name="responseUrl"   type="hidden"  value="http://www.test.com/response" >
+            <input name="confirmationUrl" type="hidden"  value="http://www.test.com/confirmation" >
+            
             <div class="box-body">
               <div class="form-group col-md-12">
-                <label>{{ $usuario->name }}</label>
+                <h4 class="text-danger">La suscripción ha vencido, para poder utilizar las funciones de la aplicación es necesario renovar la suscripción.</h4>
+
+                <h4>Su plan actual es: <span class="text-primary">{{ $usuario[0]->nombreTarifa }}</span></h4>
+                <h4>El valor de la renovación es <span class="text-danger">$</span><span class="text-primary"> {{ $usuario[0]->valorTarifa }}</span>  </h4>
+                
+
               </div>
-              <div class="form-group col-md-12">
-                <label>{{ $usuario->email }}</label>
-              </div>
-              <div class="form-group col-md-6">
-              <label>Pais</label>
-              <select class="form-control" name="pais_id" >
-                @foreach($tarifas as $tarifa)
-                  <option value="{{ $tarifa->id }}"> {{$tarifa->nombreTarifa}}</option>
-                @endforeach
-              </select>
-            </div>
                            
-              <div class="form-group col-md-offset-5">
-                <button type="submit" class="btn btn-primary">Crear la feria</button>
+              <div class="form-group col-md-offset-4">
+                <input name="Submit" class="btn btn-success" type="submit" value="Si desea renovar, pulse Aquí!" >
+                
               </div>
 
             </div>

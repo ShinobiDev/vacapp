@@ -26,14 +26,20 @@ class UsuariosController extends Controller
             return view('Admin.panelControl');    
         }
 
-        $usuario = User::select('users.id','name','email','nombreTarifa','valorTarifa','tarifa_id')->join('tarifas','users.tarifa_id','tarifas.id')
-            ->get();
+        $usuario = User::select('users.id','name','email','nombreTarifa','valorTarifa','tarifa_id')
+                    ->join('tarifas','users.tarifa_id','tarifas.id')
+                    ->get();
 
-            dd($usuario);
+            //dd($usuario[0]->name);
 
         $tarifas = Tarifa::all();
 
-        return view('Admin.usuarioPasado', compact('tarifas','usuario'));    
+        $valor = (float)$usuario[0]->valorTarifa;
+        //$valor = number_format($valor);
+        //$valor = number_format ( float $valor [, int $decimals = 2 ] ) : string;
+        //dd($valor);
+
+        return view('Admin.usuarioPasado', compact('tarifas','usuario','valor'));    
 		
 	}
 
