@@ -33,6 +33,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'auth'], func
 	/*Vista del panel administrativo*/
 	Route::get('/', 'UsuariosController@panel');
 
+	Route::get('/usaurio', 'UsuariosController@panelProximoVencer')->name('Usaurio.proximoVencer');
+
 	/*Vista de todas las Fincas*/
 	Route::get('usuarios','UsuariosController@index')->name('usuarios.index');
 	/*Vista para Crear usuarios*/

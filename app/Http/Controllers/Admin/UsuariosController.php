@@ -12,18 +12,38 @@ use Carbon\carbon;
 
 class UsuariosController extends Controller
 {
+    public function panelProximoVencer()
+    {
+        return view('Admin.panelControl');
+    }
     public function panel()
 	{  
         $user = auth()->user();
         $fechaSus = auth()->user()->created_at;
         $now = Carbon::now();
         $diasSuscripcion = Carbon::parse($now)->diffInDays($fechaSus);
-        $fechaSus = $fechaSus->toFormattedDateString(); ;
+        $fechaSus = $fechaSus->toFormattedDateString(); 
 
         //dd($diasSuscripcion);
         if($diasSuscripcion <= 365)
         {
-            return view('Admin.panelControl');    
+            if($diasSuscripcion <= 355)
+            {
+                return view('Admin.panelControl');    
+            }
+            
+            $usuario = User::select('users.id','name','email','nombreTarifa','valorTarifa','tarifa_id')
+                    ->join('tarifas','users.tarifa_id','tarifas.id')
+                    ->get();
+            $tarifas = Tarifa::all();
+
+            $valor = (float)$usuario[0]->valorTarifa;
+            //$valor = number_format($valor);
+            //$valor = number_format ( float $valor [, int $decimals = 2 ] ) : string;
+            //dd($valor);
+
+            return view('Admin.usuarioProximoPasar', compact('tarifas','usuario','valor'));
+
         }
 
         $usuario = User::select('users.id','name','email','nombreTarifa','valorTarifa','tarifa_id')

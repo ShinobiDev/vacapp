@@ -99,10 +99,10 @@ class AnimalesController extends Controller
         {
             return back()->with('errors','No existen animales MACHOS creados, sin crear los animales Machos, no puede registrar un nuevo animal ');
         }
-        $ma = count($madre);
+        $ma = count($madres);
         if($ma < 1)
         {
-            return back()->with('errors','No existen animales HEMBRAS creadas, sin crear los animales HEMBRAS, no puede registrar un nuevo animal ');
+            return back()->with('errors','No existen animales HEMBRAS creadas, sin crear los animales HEMBRAS, no puede registrar un naicmiento de animal ');
         }
         $ra = count($razas = Raza::all());
         $ti = count($tipos = Tipo::all());
