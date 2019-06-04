@@ -17,6 +17,7 @@ class CreateMotivoMovimientosTable extends Migration
             $table->increments('id');
             $table->string('nombreMotivo');
             $table->timestamps();
+            $table->unsignedInteger('cliente_id');
         });
     }
 

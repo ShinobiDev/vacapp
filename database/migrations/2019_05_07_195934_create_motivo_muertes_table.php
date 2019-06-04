@@ -17,6 +17,7 @@ class CreateMotivoMuertesTable extends Migration
             $table->increments('id');
             $table->string('nombreMotivoMuerte');
             $table->string('descripcion');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

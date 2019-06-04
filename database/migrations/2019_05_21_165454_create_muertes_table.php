@@ -18,6 +18,7 @@ class CreateMuertesTable extends Migration
             $table->unsignedInteger('animal_id');
             $table->unsignedInteger('motivo_id');
             $table->string('observacion')->nullable();
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

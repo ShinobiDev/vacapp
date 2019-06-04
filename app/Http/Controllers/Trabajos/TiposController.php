@@ -24,8 +24,9 @@ class TiposController extends Controller
     public function almacenar(Request $request)
     {
     	//dd($request);
+        $cliente = auth()->user()->cliente_id;
     	$tipo = new Tipo;
-
+        $tipo->cliente_id = $cliente;
     	$tipo->nombreTipo = $request->get('nombreTipo');
         $tipo->descripcion = $request->get('descripcion');
     	$tipo->save();

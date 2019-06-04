@@ -35,7 +35,10 @@ class OrdenosController extends Controller
     /*Almacenamiento en la BD de los ordeños*/
     public function almacenar(Request $request)
     {
+        $cliente = auth()->user()->cliente_id;
+
         $ordeno = new Ordeno;
+        $ordeno->animal_id = (int)$cliente;
         $ordeno->animal_id = $request->animal;
         $ordeno->unidad_id = $request->unidad_id;
         $ordeno->save();
@@ -61,7 +64,10 @@ class OrdenosController extends Controller
     public function almacenarUnidad(Request $request)
     {
     	//dd($request);
+        $cliente = auth()->user()->cliente_id;
+
         $ordeno = new UnidadOrdeno;
+        $ordeno->cliente_id = (int)$cliente;
         $ordeno->nombreUnidad = $request->nombreUnidad;
         $ordeno->descripcion = $request->descripcion;
         $ordeno->save();
@@ -72,7 +78,9 @@ class OrdenosController extends Controller
     /*Vista de los registros de los ordeños*/
     public function indexUnidad()
     {   
-    	$unidades = UnidadOrdeno::all();
+        $cliente = auth()->user()->cliente_id;
+    	$unidades = UnidadOrdeno::where('cliente_id',(int)$cliente)
+        ->get();
 
     	$u = count($unidades);
     	if($u < 1)

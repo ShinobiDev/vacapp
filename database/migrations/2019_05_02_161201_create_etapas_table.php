@@ -19,6 +19,7 @@ class CreateEtapasTable extends Migration
             $table->string('nombreEtapa');
             $table->decimal('inicial');
             $table->decimal('final');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

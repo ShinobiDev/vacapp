@@ -19,6 +19,7 @@ class CreateOrdenosTable extends Migration
             $table->unsignedInteger('unidad_id');
             $table->decimal('cantidad');
             $table->timestamps();
+            $table->unsignedInteger('cliente_id');
         });
     }
 

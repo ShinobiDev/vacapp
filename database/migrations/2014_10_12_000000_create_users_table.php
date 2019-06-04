@@ -19,11 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('documento');
             $table->string('password');
+            $table->date('fechaSuscripcion')->nullable();
             $table->integer('telefono')->nullable();
             $table->unsignedInteger('rol_id')->nullable();
             $table->unsignedInteger('estado_id');
             $table->unsignedInteger('finca_id')->nullable();
             $table->unsignedInteger('tarifa_id')->nullable();
+            $table->unsignedInteger('cliente_id')->nullable();
+            $table->unsignedInteger('tipoUsuario_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

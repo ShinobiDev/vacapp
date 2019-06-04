@@ -18,6 +18,7 @@ class CreateVentasTable extends Migration
             $table->unsignedInteger('animal_id');
             $table->double('valorVenta');
             $table->timestamps();
+            $table->unsignedInteger('cliente_id');
         });
     }
 

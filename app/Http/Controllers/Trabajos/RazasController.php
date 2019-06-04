@@ -103,4 +103,9 @@ class RazasController extends Controller
         return back()->with('flash','Se actualizo la información exitosamente');
         //return view('admin.variables.index')->with('success','Se actualizo exitosamente');
     }
+
+    public function razas_por_tipo($id_tipo){
+        dd('Ya llegue');
+        return response()->json(Raza::where('tipo_id',$id_tipo)->get());
+    }
 }

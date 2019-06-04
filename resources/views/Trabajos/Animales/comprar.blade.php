@@ -23,7 +23,7 @@
 			    	<div class="box-body">	
 			    		<div class="form-group col-md-3">
 			    			<label>Tipo</label>
-							<select name="tipo" class="form-control"  value="{{ old('tipo') }}" required>
+							<select id="selTipoAnimal" name="tipo" class="form-control"  value="{{ old('tipo') }}" onchange="cargar_razas(this)" required>
 								<option value="0">Selecciona un Tipo</option>
 								@foreach($tipos as $tipo)
 									<option value="{{ $tipo->id }}">- {{ $tipo->nombreTipo }}</option>
@@ -32,7 +32,7 @@
 			    		</div>
 			    		<div class="form-group col-md-3">
 			    			<label>Raza</label>
-							<select name="raza" class="form-control"  value="{{ old('raza') }}" required>
+							<select name="raza" id="SelRazas" class="form-control"  value="{{ old('raza') }}" required>
 								<option value="0">Selecciona una Raza</option>
 								@foreach($razas as $raza)
 									<option value="{{ $raza->id }}">- {{ $raza->nombreRaza }}</option>
@@ -115,7 +115,7 @@
 			    			<label>Valor de la compra</label>
 			    			<input name="valorCompra" class="form-control" placeholder="Ingrese el valor de la compra"  value="{{ old('valorCompra') }}" required>		
 			    		</div>
-			    		<div class="form-group col-md-6 col-md-offset-3 compra" 
+			    		<div class="form-group col-md-6 col-md-offset-3 compra">
 			    			<label>Nombre Proveedor</label>
 			    			<input name="nombreProveedor" class="form-control" placeholder="Ingrese el nombre del proveedor"  value="{{ old('nombreProveedor') }}" required>		
 			    		</div>
@@ -129,8 +129,69 @@
 			    </form>
 			    
 			</div>
-			
+			<input type="hidden" id="inpUrl" value="{{config('app.url')}}">
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+
+		function cargar_razas(e){
+				
+				peticion_ajax("GET",'trabajos/razas_por_tipo/'+e.value,{},function(respuesta_servidor){
+					crear_select_razas(respuesta_servidor);
+				},function(e){
+					console.log(e);
+				});
+			
+		}
+		function crear_select_razas(datos){
+			document.getElementById("SelRazas").innerHTML="";
+			var sel=document.getElementById("SelRazas");
+			
+			var opt = document.createElement("option");
+			opt.innerHTML="Selecciona una raza";
+			opt.value="0";
+			sel.appendChild(opt);	
+		
+			for(var d in datos){
+				
+				
+				var opt = document.createElement("option");
+				opt.innerHTML=datos[d].nombreRaza;
+				opt.value=datos[d].id;
+				sel.appendChild(opt);
+			}
+		}
+
+		 /*funcion que hace la peticion ajax 
+			Metodo POST O GET
+		 */ 
+
+      function peticion_ajax(metodo,url,datos,funsuccess,funerror){
+              //debe ir como core y no public la url en producccion
+             $.ajaxSetup({
+                headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+             });
+
+             var url_global =document.getElementById("inpUrl").value;
+             $.ajax({
+                   type: metodo,
+                   url: url_global+"/"+url,
+                   dataType: "json",
+                   data:datos,
+                   success: function(result){
+                         
+                         funsuccess(result);
+                   },
+	               error: function(err){
+	                  if(funerror!=undefined){
+	                     funerror(err);
+	                  }
+	                }  
+	                  
+	                  
+               });
+      }
+	</script>
 @stop

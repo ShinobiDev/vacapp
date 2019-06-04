@@ -2066,7 +2066,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
-    'PaisesTableseeder' => $baseDir . '/database/seeds/PaisesTableseeder.php',
+    'PaisesTableSeeder' => $baseDir . '/database/seeds/PaisesTableSeeder.php',
     'ParseError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
     'Parsedown' => $vendorDir . '/erusev/parsedown/Parsedown.php',
     'PharIo\\Manifest\\Application' => $vendorDir . '/phar-io/manifest/src/values/Application.php',

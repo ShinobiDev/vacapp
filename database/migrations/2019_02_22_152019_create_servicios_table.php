@@ -17,6 +17,7 @@ class CreateServiciosTable extends Migration
             $table->increments('id');
             $table->string('nombreServicio');
             $table->text('descripcion');
+            $table->unsignedInteger('cliente_id')->nullable();
             $table->timestamps();
         });
     }

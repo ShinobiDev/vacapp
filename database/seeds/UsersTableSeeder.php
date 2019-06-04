@@ -33,7 +33,9 @@ class UsersTableSeeder extends Seeder
         $user->estado_id = 1;
         $user->finca_id = 1;
         $user->documento = "9006427021";
+        $user->fechaSuscripcion = "2018-04-20";
         $user->tarifa_id = 2;
+        $user->cliente_id = 2;
         $user->save();
         /*
         $user = new User;

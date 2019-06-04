@@ -12,8 +12,11 @@ class EventosController extends Controller
 {
     public function index()
     {
+        $cliente = auth()->user()->cliente_id;
+
     	$eventos = Eventos::select('nombreEvento','nombrePais','eventos.descripcion','ciudad')
         ->join('pais','eventos.pais_id','pais.id')
+        ->where('cliente_id', (int)$cliente)
         ->get();
 
         $paises = Pais::all();
@@ -34,8 +37,10 @@ class EventosController extends Controller
     public function almacenar(Request $request)
     {
     	//dd($request);
-    	$evento = new Eventos;
+        $cliente = auth()->user()->cliente_id;
 
+    	$evento = new Eventos;
+        $evento->cliente_id = (int)$cliente;
     	$evento->nombreEvento = $request->get('nombreEvento');
         $evento->descripcion = $request->get('descripcion');
         $evento->pais_id = $request->get('pais_id');

@@ -21,6 +21,7 @@ class CreateFincasTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('nombreEncargado');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

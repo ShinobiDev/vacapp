@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadosAnimalesTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(TarifasTableSeeder::class);
+        $this->call(PaisesTableSeeder::class);
     }
 }

@@ -26,12 +26,15 @@ class AnimalesController extends Controller
 {
     public function index()
     {
-        $animales = Animal::select('animals.id','nua','nombrePadre','nombreMadre','nombreAnimal','raza_id','finca_id','animals.tipo_id','genero_id','peso','fechaNacimiento','valorCompra','nombreProveedor','fechaCompra','razas.nombreRaza','fincas.nombreFinca','tipos.nombreTipo','generos.nombreGenero')
+        $cliente = auth()->user()->cliente_id;
+
+        $animales = Animal::select('animals.id','nua','nombrePadre','nombreMadre','nombreAnimal','raza_id','finca_id','animals.tipo_id','genero_id','peso','fechaNacimiento','valorCompra','nombreProveedor','fechaCompra','razas.nombreRaza','fincas.nombreFinca','tipos.nombreTipo','generos.nombreGenero','animals.cliente_id')
         ->join('razas','animals.raza_id','razas.id')
         ->join('fincas','animals.finca_id','fincas.id')
         ->join('tipos','animals.tipo_id','tipos.id')
         ->join('generos','animals.genero_id','generos.id')
         ->where('estado_id',1)
+        ->where('animals.cliente_id', $cliente)
         ->get();
 
         $animalesMachos = Animal::all()->where('genero_id',1)->where('estado_id',1);
@@ -136,9 +139,11 @@ class AnimalesController extends Controller
 
     public function comprar()
     {   
+        $cliente = auth()->user()->cliente_id;
 
         $razas = Raza::all();
-        $fincas = Finca::all();
+        $fincas = Finca::where('cliente_id',(int)$cliente)
+        ->get();
         $generos = Genero::all();
         $tipos = Tipo::all();
         $clasificacion = Clasificacion::all();
@@ -203,11 +208,12 @@ class AnimalesController extends Controller
         //$data = $request->validate([
         //  'nua' => 'required|unique:animals'
         //]);
-
+        $cliente = auth()->user()->cliente_id;
         //dd($madre[0]->nombreAnimal);
         //dd($request);
     	$animal = new Animal;
 
+        $animal->cliente_id = $cliente;
     	$animal->nombreAnimal = $request->get('nombreAnimal');
         $animal->padre_id = $request->get('padre_id');
         $animal->madre_id = $request->get('madre_id');
@@ -265,8 +271,11 @@ class AnimalesController extends Controller
             return back()->with('errors','El Nua ('.$request->nuaMadre.') de la madre, ya Existe');
         }
 
+        $cliente = auth()->user()->cliente_id;
+
         $animal = new Animal;
 
+        $animal->cliente_id = $cliente;
         $animal->nombreAnimal = $request->get('nombreAnimal');
         $animal->nua = $request->get('nua');
         $animal->nuaPadre = $request->get('nuaPadre');
@@ -365,8 +374,10 @@ class AnimalesController extends Controller
      /*Formulario para crear los movimientos*/
     public function registrarMovimientos()
     {
+        $cliente = auth()->user()->cliente_id;
+
         $animales = Animal::all();
-        $fincas = Finca::all();
+        $fincas = Finca::where('cliente_id',(int)$cliente)->get();
         $motivos = MotivoMovimiento::all();
 
         return view('Trabajos.Movimientos.crear', compact('animales','fincas','motivos'));

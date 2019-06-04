@@ -19,6 +19,7 @@ class CreateEventosTable extends Migration
             $table->string('descripcion');
             $table->unsignedInteger('pais_id');
             $table->string('ciudad');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

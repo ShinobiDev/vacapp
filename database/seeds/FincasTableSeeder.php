@@ -15,6 +15,7 @@ class FincasTableSeeder extends Seeder
         Finca::truncate();
 
         $finca = new Finca;
+        $finca->cliente_id = 2;
         $finca->nombreFinca = "Vista Hermosa";
         $finca->departamento = "Cesar";
         $finca->municipio = "Pailitas";
@@ -24,6 +25,7 @@ class FincasTableSeeder extends Seeder
         $finca->save();
 
         $finca = new Finca;
+        $finca->cliente_id = 2;
         $finca->nombreFinca = "Lucero";
         $finca->departamento = "Cesar";
         $finca->municipio = "Pailitas";
@@ -33,6 +35,7 @@ class FincasTableSeeder extends Seeder
         $finca->save();
 
         $finca = new Finca;
+        $finca->cliente_id = 2;
         $finca->nombreFinca = "La Estrella";
         $finca->departamento = "Cesar";
         $finca->municipio = "Pailitas";
@@ -42,6 +45,7 @@ class FincasTableSeeder extends Seeder
         $finca->save();
 
         $finca = new Finca;
+        $finca->cliente_id = 2;
         $finca->nombreFinca = "El Zancudo";
         $finca->departamento = "Cesar";
         $finca->municipio = "Pailitas";
@@ -51,6 +55,7 @@ class FincasTableSeeder extends Seeder
         $finca->save();
 
         $finca = new Finca;
+        $finca->cliente_id = 2;
         $finca->nombreFinca = "La Marsella";
         $finca->departamento = "Cesar";
         $finca->municipio = "San Martín";

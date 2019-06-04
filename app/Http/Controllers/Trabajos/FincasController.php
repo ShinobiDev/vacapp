@@ -10,7 +10,9 @@ class FincasController extends Controller
 {
     public function index()
     {
-    	$fincas = Finca::all();
+        $cliente = auth()->user()->cliente_id;
+        //dd($cliente);
+    	$fincas = Finca::where('cliente_id', (int)$cliente)->get();
     	//dd($fincas);
 
     	return view('Trabajos.Fincas.index', compact('fincas'));
@@ -24,8 +26,12 @@ class FincasController extends Controller
     public function almacenar(Request $request)
     {
     	//dd($request);
+        $cliente = auth()->user()->cliente_id;
+        //dd($cliente);
+
     	$finca = new Finca;
 
+        $finca->cliente_id = (int)$cliente;
     	$finca->nombreFinca = $request->get('nombreFinca');
         $finca->departamento = $request->get('departamento');
         $finca->municipio = $request->get('municipio');

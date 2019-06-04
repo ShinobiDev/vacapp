@@ -12,7 +12,9 @@ class ServiciosController extends Controller
 {
     public function index()
     {
-    	$servicios = Servicio::all();
+        $cliente = auth()->user()->cliente_id;
+    	$servicios = Servicio::where('cliente_id',(int)$cliente)
+        ->get();
     	//dd($razas);
 
     	return view('Trabajos.Servicios.index', compact('servicios'));
@@ -26,8 +28,9 @@ class ServiciosController extends Controller
     public function almacenar(Request $request)
     {
     	//dd($request);
+        $cliente = auth()->user()->cliente_id;
     	$servicio = new Servicio;
-
+        $servicio->cliente_id = (int)$cliente;
     	$servicio->nombreServicio = $request->get('nombreServicio');
         $servicio->descripcion = $request->get('descripcion');
     	$servicio->save();

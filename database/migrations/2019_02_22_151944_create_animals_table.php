@@ -27,6 +27,7 @@ class CreateAnimalsTable extends Migration
             $table->unsignedInteger('finca_id');
             $table->unsignedInteger('tipo_id');
             $table->unsignedInteger('genero_id');
+            $table->unsignedInteger('cliente_id');
             $table->decimal('peso');
             $table->decimal('pesoNacimiento')->nullable();
             $table->date('fechaNacimiento');

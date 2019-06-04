@@ -17,6 +17,7 @@ class CreateUnidadOrdenosTable extends Migration
             $table->increments('id');
             $table->string('nombreUnidad');
             $table->string('descripcion');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

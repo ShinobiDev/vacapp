@@ -88,6 +88,8 @@ Route::group(['prefix'=>'trabajos','namespace'=>'Trabajos','middleware'=>'auth']
 	Route::post('razas/almacenar','RazasController@almacenar')->name('trabajos.razas.almacenar');
 	/*Vista del formulario para actualizar las Razas*/
 	Route::post('razas/editar/{raza_id}','RazasController@actualizar')->name('trabajos.razas.update');
+	/*Consulta de ajax para raza, de acuerdo al tipo de animal*/
+	Route::get('razas_por_tipo/{id}','RazasController@razas_por_tipo');
 	/*Vista de todas la Razas*/
 	Route::get('clasificacion','RazasController@indexClasificacion')->name('razas.indexClasificacion');
 	/*Vista para crear las Razas*/

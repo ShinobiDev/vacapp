@@ -24,7 +24,7 @@ class UsuariosController extends Controller
         $diasSuscripcion = Carbon::parse($now)->diffInDays($fechaSus);
         $fechaSus = $fechaSus->toFormattedDateString(); 
 
-        //dd($diasSuscripcion);
+        //dd($fechaSus);
         if($diasSuscripcion <= 365)
         {
             if($diasSuscripcion <= 355)
@@ -90,31 +90,38 @@ class UsuariosController extends Controller
         }
         if($request->password == $request->passwordA)
         {
+            $cliente = auth()->user()->cliente_id;
+            dd($cliente);
             $user = new User;
 
             $pass = $request->get('password');
             $user->estado_id = 1;
+            $user->cliente_id = (int)$cliente;
             $user->name = $request->get('name');
             $user->email = $request->get('email');
             $user->password = bcrypt($pass);
             $user->rol_id = $request->get('rol_id');
             $user->finca_id = $request->get('finca_id');
+            //$user->finca_id = $request->get('finca_id');
             $user->documento = $request->get('documento');
             $user->save();
 
             return back()->with('flash','El usuario fue creado satisfactoriamente.');
         }else{
+            dd('llegue aqui');
             return back()->with('errors','Los datos de la contraseña no concide.');
         }
     }
 
     public function index()
     {
+        $cliente = auth()->user()->cliente_id;
         $fincas = Finca::all();
         $roles = Rol::all();
         $user = User::select('users.id','name','email','documento','nombreRol','nombreFinca')
         ->join('rols','users.rol_id','rols.id')
         ->join('fincas','users.finca_id','fincas.id')
+        ->where('cliente_id', (int)$cliente)
         ->get();
 
         //dd($user);

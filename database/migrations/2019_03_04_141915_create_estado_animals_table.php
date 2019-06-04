@@ -17,6 +17,7 @@ class CreateEstadoAnimalsTable extends Migration
             $table->increments('id');
             $table->string('nombreEstado');
             $table->timestamps();
+            $table->unsignedInteger('cliente_id')->nullable();
         });
     }
 

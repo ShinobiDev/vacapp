@@ -2396,7 +2396,7 @@ class ComposerStaticInitcc4b003978fbd9ae0d896cfbdd3cf435
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
-        'PaisesTableseeder' => __DIR__ . '/../..' . '/database/seeds/PaisesTableseeder.php',
+        'PaisesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PaisesTableSeeder.php',
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',

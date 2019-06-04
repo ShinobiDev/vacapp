@@ -17,6 +17,7 @@ class CreateHistorialServiciosTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('animal_id')->nullable();
             $table->unsignedInteger('servicio_id')->nullable();
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

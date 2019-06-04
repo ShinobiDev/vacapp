@@ -17,6 +17,7 @@ class CreateTiposTable extends Migration
             $table->increments('id');
             $table->string('nombreTipo');
             $table->string('descripcion');
+            $table->unsignedInteger('cliente_id')->nullable();
             $table->timestamps();
         });
     }

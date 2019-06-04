@@ -16,18 +16,22 @@ class MotivosMovimientosTableSeeder extends Seeder
 
         $motivo = new MotivoMovimiento;
         $motivo->nombreMotivo = "Destete";
+        $motivo->cliente_id = 2;
         $motivo->save();
 
         $motivo = new MotivoMovimiento;
         $motivo->nombreMotivo = "Feria";
+        $motivo->cliente_id = 2;
         $motivo->save();
 
         $motivo = new MotivoMovimiento;
         $motivo->nombreMotivo = "Embarazo";
+        $motivo->cliente_id = 2;
         $motivo->save();
 
         $motivo = new MotivoMovimiento;
         $motivo->nombreMotivo = "Pastos";
+        $motivo->cliente_id = 2;
         $motivo->save();
     }
 }

@@ -18,6 +18,7 @@ class CreateGenealogiasTable extends Migration
             $table->unsignedInteger('padre_id');
             $table->unsignedInteger('madre_id');
             $table->unsignedInteger('hijo_id');
+            $table->unsignedInteger('cliente_id');
             $table->timestamps();
         });
     }

@@ -10,7 +10,10 @@ class UtilidadesController extends Controller
 {
     public function index()
     {
-    	$utilidades = Utilidad::all();
+        $cliente = auth()->user()->cliente_id;
+        $cliente = (int)$cliente;
+    	$utilidades = Utilidad::where('cliente_id', $cliente)
+        ->get();
     	//dd($utilidades);
 
     	return view('Trabajos.Utilidades.index', compact('utilidades'));
@@ -24,9 +27,11 @@ class UtilidadesController extends Controller
     public function almacenar(Request $request)
     {
     	//dd($request);
+        $cliente = auth()->user()->cliente_id;
     	$utilidad = new Utilidad;
 
-    	$utilidad->nombreUtilidad = $request->get('nombreUtilidad');
+    	$utilidad->cliente_id = (int)$cliente;
+        $utilidad->nombreUtilidad = $request->get('nombreUtilidad');
         $utilidad->descripcion = $request->get('descripcion');
     	$utilidad->save();
 

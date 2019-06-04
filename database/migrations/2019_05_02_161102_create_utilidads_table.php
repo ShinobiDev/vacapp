@@ -17,7 +17,9 @@ class CreateUtilidadsTable extends Migration
             $table->increments('id');
             $table->string('nombreUtilidad');
             $table->string('descripcion')->nullable();
+            $table->unsignedInteger('cliente_id')->nullable();
             $table->timestamps();
+
         });
     }
 

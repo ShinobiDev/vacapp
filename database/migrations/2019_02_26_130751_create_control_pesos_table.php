@@ -19,6 +19,7 @@ class CreateControlPesosTable extends Migration
             $table->decimal('pesoAntiguo');
             $table->date('fechaAntigua')->nullable();
             $table->decimal('kilogramos');
+            $table->unsignedInteger('cliente_id')->nullable();
             $table->timestamps();
         });
     }
