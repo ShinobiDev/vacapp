@@ -22,7 +22,7 @@
 			    	{{ csrf_field() }}
 			    	<div class="box-body">	
 			    		<div class="form-group col-md-3">
-			    			<label>Tipo</label>
+			    			<label class="text-success">Tipo</label>
 							<select id="selTipoAnimal" name="tipo" class="form-control"  value="{{ old('tipo') }}" onchange="cargar_razas(this)" required>
 								<option value="0">Selecciona un Tipo</option>
 								@foreach($tipos as $tipo)
@@ -31,7 +31,7 @@
 							</select>	    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Raza</label>
+			    			<label class="text-success">Raza</label>
 							<select name="raza" id="SelRazas" class="form-control"  value="{{ old('raza') }}" required>
 								<option value="0">Selecciona una Raza</option>
 								@foreach($razas as $raza)
@@ -39,22 +39,22 @@
 								@endforeach
 							</select>
 			    		</div>		    		
-			    		<div class="form-group col-md-6">
-			    			<label>Nombre Animal</label>
+			    		<div class="form-group col-md-3">
+			    			<label class="text-success">Nombre Animal</label>
 			    			<input name="nombreAnimal" class="form-control" placeholder="Ingrese el nombre del animal" value="{{ old('nombreAnimal') }}" required>			    			
 			    		</div>
 			    		
 			    		
-			    		<div class="form-group col-md-6">
-			    			<label>NUA </label><label class="text-success">(Numero Unico Animal)</label>
+			    		<div class="form-group col-md-3">
+			    			<label >NUA </label><label class="text-success">(Numero Unico Animal)</label>
 			    			<input name="nua" class="form-control" placeholder="Ingrese el NUA del animal" value="{{ old('nua') }}" ></input>
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>NUA Padre </label>
+			    			<label class="text-success">NUA Padre </label>
 			    			<input name="nuaPadre" class="form-control" placeholder="Ingrese el NUA del padre" value="{{ old('nuaPadre') }}"></input>
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Nombre Padre</label>
+			    			<label class="text-success">Nombre Padre</label>
 			    			<input list="anis" name="nombrePadre" class="form-control" placeholder="Ingrese el nombre del animal"  value="{{ old('nombrePadre') }}" required>
 							<datalist id="anis">
 							  	@foreach($padres as $padre)
@@ -63,11 +63,11 @@
 							</datalist>			    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>NUA Madre </label>
+			    			<label class="text-success">NUA Madre </label>
 			    			<input name="nuaMadre" class="form-control" placeholder="Ingrese el NUA de la madre" value="{{ old('nuaMadre') }}" ></input>
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Nombre Madre</label>
+			    			<label class="text-success">Nombre Madre</label>
 			    			<input name="nombreMadre" class="form-control" placeholder="Ingrese el nombre de la madre" value="{{ old('nombreMadre') }}">	
 			    			<datalist id="anis">
 							  	@foreach($madres as $madre)
@@ -76,7 +76,7 @@
 							</datalist>	
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Finca</label>
+			    			<label class="text-success">Finca</label>
 							<select name="finca" class="form-control"  value="{{ old('finca') }}" required>
 								<option value="0">Selecciona una Finca</option>
 								@foreach($fincas as $finca)
@@ -85,21 +85,21 @@
 							</select>	    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Fecha de nacimiento</label>
+			    			<label class="text-success">Fecha de nacimiento</label>
 			    			<input type="date" name="fechaNacimiento" max="{{$hoy}}" class="form-control" value="{{ old('fechaNacimiento') }}" required>			    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Peso Nacimiento</label>
+			    			<label class="text-success">Peso Nacimiento</label>
 			    			<input name="pesoNacimiento" class="form-control" placeholder="Ingrese el peso en kilogramos"  value="{{ old('peso') }}">			    			
 			    		</div>
 			    		<div class="form-group col-md-3">
-			    			<label>Peso actual</label>
+			    			<label class="text-success">Peso actual</label>
 			    			<input name="peso" class="form-control" placeholder="Ingrese el peso en kilogramos"  value="{{ old('peso') }}" required>			    			
 			    		</div>
 			    		
 			    		
 			    		<div class="form-group col-md-3">
-			    			<label>Genero</label>
+			    			<label class="text-success">Genero</label>
 							<select name="genero" class="form-control"  value="{{ old('genero') }}" required>
 								<option value="0">Selecciona un genero</option>
 								@foreach($generos as $genero)
@@ -108,15 +108,15 @@
 							</select>	    			
 			    		</div>
 			    		<div class="form-group col-md-3 compra" >
-			    			<label>Fecha de la compra</label>
+			    			<label class="text-success">Fecha de la compra</label>
 			    			<input type="date" name="fechaCompra" max="{{$hoy}}" class="form-control"  value="{{ old('fechaCompra') }}" required>		
 			    		</div>
 		                <div class="form-group col-md-3 compra" >
-			    			<label>Valor de la compra</label>
+			    			<label class="text-success">Valor de la compra</label>
 			    			<input name="valorCompra" class="form-control" placeholder="Ingrese el valor de la compra"  value="{{ old('valorCompra') }}" required>		
 			    		</div>
-			    		<div class="form-group col-md-6 col-md-offset-3 compra">
-			    			<label>Nombre Proveedor</label>
+			    		<div class="form-group col-md-3 compra">
+			    			<label class="text-success">Nombre Proveedor</label>
 			    			<input name="nombreProveedor" class="form-control" placeholder="Ingrese el nombre del proveedor"  value="{{ old('nombreProveedor') }}" required>		
 			    		</div>
 		           

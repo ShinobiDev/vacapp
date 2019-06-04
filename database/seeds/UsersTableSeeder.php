@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
         $user->rol_id = 1;
         $user->estado_id = 1;
         $user->finca_id = 1;
+        $user->cliente_id = 1;
         $user->documento = "9006427021";
         $user->save();
 

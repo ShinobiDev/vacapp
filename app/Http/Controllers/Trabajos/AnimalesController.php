@@ -475,9 +475,9 @@ class AnimalesController extends Controller
 
     public function registroMuerte()
     {
-
-        $animales = Animal::all();
-        $motivos = MotivoMuerte::all();
+        $cliente = auth()->user()->cliente_id;
+        $animales = Animal::where('cliente_id', (int)$cliente);
+        $motivos = MotivoMuerte::where('cliente_id', (int)$cliente);
 
         $a = count($animales);
         $m = count($motivos);
@@ -520,6 +520,7 @@ class AnimalesController extends Controller
 
     public function indexMuerte()
     {
+        $cliente = auth()->user()->cliente_id;
         $animales = Animal::select('animals.id','nua','nombreAnimal','raza_id','finca_id','animals.tipo_id','genero_id','peso','fechaNacimiento','valorCompra','nombreProveedor','fechaCompra','razas.nombreRaza','fincas.nombreFinca','tipos.nombreTipo','generos.nombreGenero','nombreMotivoMuerte','motivoMuerte_id','fechaMuerte')
         ->join('razas','animals.raza_id','razas.id')
         ->join('fincas','animals.finca_id','fincas.id')
@@ -527,6 +528,7 @@ class AnimalesController extends Controller
         ->join('generos','animals.genero_id','generos.id')
         ->join('motivo_muertes','animals.motivoMuerte_id','motivo_muertes.id')
         ->where('estado_id',4)
+        ->where('cliente_id',(int)$cliente)
         ->get();
 
         return view('Trabajos.Muertes.index',compact('animales'));
@@ -543,9 +545,10 @@ class AnimalesController extends Controller
     public function almacenarMotivoMuerte(Request $request)
     {
         //dd($request);
+        $cliente = auth()->user()->cliente_id;
         $motivo = new MotivoMuerte;
 
-        
+        $motivo->cliente_id = (int)$cliente;
         $motivo->nombreMotivoMuerte = $request->nombreMotivoMuerte;
         $motivo->descripcion = $request->descripcion;
         $motivo->save();
@@ -554,8 +557,10 @@ class AnimalesController extends Controller
     }
 
     public function indexMotivoMuerte()
-    {
-        $motivos = MotivoMuerte::all();
+    {   
+        $cliente = auth()->user()->cliente_id;
+        $motivos = MotivoMuerte::where('cliente_id', (int)$cliente)
+        ->get();
 
         //dd($motivos);
 

@@ -31,7 +31,7 @@
 						</div>
 						<div class="form-group col-md-12">
 							<label>Animal</label>
-							<select class="js-example-basic-single form-control" name="animal">
+							<select class="js-example-basic-single form-control" name="unidad_id">
 								@foreach($unidades as $unidad)
 									<option value="{{ $unidad->id }}">{{$unidad->nombreUnidad}}</option>
 								@endforeach

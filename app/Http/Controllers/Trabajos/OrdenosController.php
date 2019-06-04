@@ -13,7 +13,10 @@ class OrdenosController extends Controller
     /*Formulario para crear un registro de Ordeño*/
     public function registrar()
     {
-    	$unidades = UnidadOrdeno::all();
+        $cliente = auth()->user()->cliente_id;
+    	$unidades = UnidadOrdeno::where('cliente_id', (int)$cliente)
+        ->get();
+
     	$u = count($unidades);
 
     	if($u < 1)
@@ -23,6 +26,7 @@ class OrdenosController extends Controller
         $animales = Animal::select('id','nua','nombreAnimal')
         ->where('genero_id', 2)
         ->where('estado_id',1)
+        ->where('cliente_id',(int)$cliente)
         ->get();
         //dd($animales);
         $a = count($animales);
@@ -30,17 +34,19 @@ class OrdenosController extends Controller
         {
         	return back()->with('errors','no se han registrado animales, sin animal no se puede registrar los ordeños');
         }
-        return view('Trabajos.Ordenos.crear',compact('animales'));
+        return view('Trabajos.Ordenos.crear',compact('animales','unidades'));
     }
     /*Almacenamiento en la BD de los ordeños*/
     public function almacenar(Request $request)
     {
+        //dd($request);
         $cliente = auth()->user()->cliente_id;
 
         $ordeno = new Ordeno;
-        $ordeno->animal_id = (int)$cliente;
+        $ordeno->cliente_id = (int)$cliente;
         $ordeno->animal_id = $request->animal;
-        $ordeno->unidad_id = $request->unidad_id;
+        $ordeno->unidad_id = (int)$request->unidad_id;
+        $ordeno->cantidad = $request->cantidad;
         $ordeno->save();
         //dd($ordeno);
         return back()->with('flash','El registro del Ordeño, se realizo exitosamente.');
@@ -49,9 +55,11 @@ class OrdenosController extends Controller
     /*Vista de los registros de los ordeños*/
     public function index()
     {   
-        $ordenos = Ordeno::select('nombreAnimal','litros','ordenos.created_at')
+        $ordenos = Ordeno::select('nombreAnimal','cantidad','ordenos.created_at','unidad_id','nombreUnidad')
         ->join('animals','ordenos.animal_id','animals.id')
+        ->join('unidad_ordenos','ordenos.unidad_id','unidad_ordenos.id')
         ->get();
+        //dd($ordenos);
         return view('Trabajos.Ordenos.index', compact('ordenos'));
     }
 

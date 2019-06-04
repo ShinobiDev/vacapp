@@ -20,7 +20,8 @@
 	        <thead>
 	        	<tr>
 	        		<th>Animal</th>
-	        		<th>Litros de leche</th>
+	        		<th>Cantidad</th>
+	        		<th>Unidad de medida</th>
 	        		<th>Fecha del ordeño</th>
 	        	</tr>
 	        </thead>
@@ -29,7 +30,8 @@
 	        	@foreach($ordenos as $ordeno)	
 	        		<tr>
 	        			<td>{{ $ordeno->nombreAnimal }}</td>
-	        			<td>{{ $ordeno->litros }}</td>
+	        			<td>{{ $ordeno->cantidad }}</td>
+	        			<td>{{ $ordeno->nombreUnidad }}</td>
 	        			<td>{{ $ordeno->created_at }}</td>
 	        			
 
